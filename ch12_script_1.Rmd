@@ -16,13 +16,52 @@ x <- read_rds("college.rds")
 
 Today's class will be based on [Chapter 12: "Multiple Regression"](https://davidkane9.github.io/PPBDS/12-multiple-regression.html). Have you read it? We will be using data on college characteristics from the IPEDS Database and the Scorecard created by the Department of Education, gathered via the [Opportunity Insights](https://opportunityinsights.org/) project.  The codebook with explanations for each variable is [here](https://opportunityinsights.org/wp-content/uploads/2018/04/Codebook-MRC-Table-10.pdf). We will be trying to figure out what characteristics of a college are associated with the 2011 median income of students, `earnings`, 10 years after they graduate. The other data --- `faculty`, the average faculty salary; `sat`, the average SAT score; `tier`, the type of college; `public`, the private/public status; and `price`, tuition --- is reported as of 2001.
 
+
+```{r}
+
+x %>% 
+  arrange(desc(sat)) %>% 
+  select(name, sat) %>% 
+  head(15)
+
+```
+
+
+
 ### Scene 1
 
 **Prompt:** Recall the three common steps of exploring a new dataset: 1) looking at the raw data, 2) computing summary statistics, and 3) creating visualizations of the data. Start this process. Useful commands to use here: `glimpse()`,`sample_n`, and `skim` (from the skimr package). What observations are surprising? (Hints: Look at extremes, especially for the key variable you are interested in. Hint at the data for the schools you know.)  
 
+
+```{r}
+
+fac_earn <- x %>% 
+  summarise(cor = cor(faculty, earnings)) %>% 
+  pull()
+
+sat_earn <- x %>% 
+  summarise(cor = cor(sat, earnings)) %>% 
+  pull()
+
+x %>% 
+  select(sat, earnings, faculty) %>% 
+  cor()
+
+```
+
+
+
 ### Scene 2
 
 **Prompt:** What's the correlation between the average faculty salary in 2001 and the median income of students 10 years after entering? What's the correlation between the average SAT scores in 2001 and the median income of students 10 years after entering? Find these by doing two separate correlations first, and then making a correlation matrix (instructions in the book). 
+
+
+```{r}
+
+
+
+```
+
 
 
 ### Scene 3
@@ -33,6 +72,17 @@ Today's class will be based on [Chapter 12: "Multiple Regression"](https://david
 ### Scene 4
 
 **Prompt:** Now let's quantify these relationships between the two explanatory variables and the outcome variable. Fit a multiple regression model for `earnings` using `sat` and `faculty` as the explanatory variables. Write a bullet point interpreting each of the three values in the estimate column. Do not use any interaction terms in the regression (yet).
+
+```{r}
+
+earnings_model <- lm(earnings ~ sat + faculty, data = x)
+
+earnings_model %>% 
+  tidy(conf.int = TRUE) %>% 
+  select(term, estimate, conf.low, conf.high)
+
+```
+
 
 
 ### Scene 5
