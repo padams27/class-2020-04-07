@@ -47,7 +47,7 @@ Today's class will be based on [Chapter 12: "Multiple Regression"](https://david
 
 ### Scene 7
 
-**Prompt:** Recall the model we made in Scene 4. Use that model to make a prediction. Consider a school with average faculty salary of $50,000 and average SAT of 1200. What would the school's median earnings be 10 years from now? Although there are fancier ways of doing this in R --- check out the `predict()` function --- you should use the simple approach of using the regression estimates and then plugging in the appropriate values.
+**Prompt:** Recall the model we made in Scene 4. Use that model to make a prediction. Consider a school with average faculty salary of $50,000 and average SAT of 1400. What would the the median student's earnings be 10 years from now? Although there are fancier ways of doing this in R --- check out the `predict()` function --- you should use the simple approach of using the regression estimates and then plugging in the appropriate values. Then, what would happen if a change in financial aid were to drop the average SAT score to 1300? What would you forecast earnings to be in that case? Putting the two together: What is the causal effect of the drop in SAT? Do you believe that? That is, if you were the university president, would you believe that forecast?
 
 
 ### Scene 8
